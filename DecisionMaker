@@ -1,0 +1,160 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace Magic8BallApp
+{
+    /*class Jerry
+    {
+        //anything added outside this brackets can only accesss public with class
+        //if add static; that means you don't have to create an instant, static is straightfoward
+        //static means: name, alias, age is only acccessible ON THE MAIN Object cannot create instants
+        //if add abstract, there is only one jerry used
+         static string name = "Jerry";
+        public static string alias = "Barnacules";
+        private static int age = 34;
+
+
+    }
+*/
+
+    //ENTRY POINT FOR DECISION PROGRAM
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+            /*Jerry j1 = new Jerry();
+            Jerry j2 = new Jerry();
+
+            j1.alias = "New Barnacules";
+            */
+            //CONSOLE IS AN EXAMPLE OF STATIC SINCE YOU CAN INSTANTLY FIND KEYS  
+           //Preserve current console text color
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+
+            TellPeopleWhatProgramThisis();
+
+
+            //create randomizer object
+            Random randomObject = new Random();
+
+            while (true) //loop foreva
+            {
+
+                //shortens the code block with a new variable
+                string questionString = GetQuestionFromUser();
+
+                //MagicBall thinking by random seconds
+                int numberOfSecondsToSleep = randomObject.Next(5)+1;
+                Console.WriteLine("Wait for a bit Lemme think you rood pleb...");
+                Thread.Sleep(numberOfSecondsToSleep*1000);
+
+
+
+                if (questionString.Length ==0)
+                {
+                    Console.WriteLine("You need to type the question. Bub.");
+                    continue;
+                }
+
+                //if user insult, quit cos they salty
+                if (questionString.ToLower() == "die")
+                {
+                    Console.WriteLine("insulting a console? sad");
+                    break;
+                }
+
+
+                //see if user typed 'quit' as the question
+                if (questionString.ToLower() == "quit")
+
+                {
+                    break; 
+                }
+
+                //get random #
+                int randomNumber = randomObject.Next(4);
+
+
+                Console.ForegroundColor = (ConsoleColor)randomObject.Next(15);
+
+                //user random number to determine response
+                switch(randomNumber)
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("YES");
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.WriteLine("NO");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.WriteLine("Maybe..?");
+                            break;
+                        }
+                    case 3:
+                        {
+                            Console.WriteLine("Lolno");
+                            break;
+
+                        }
+                }
+            }
+
+
+            /*
+             *Function gets printed 4 times  from below static void 
+            TellPeopleWhatProgramThisis();
+            TellPeopleWhatProgramThisis();
+            TellPeopleWhatProgramThisis();
+            TellPeopleWhatProgramThisis();
+     */
+            //end of while loop
+
+            //cleaningup
+            Console.ForegroundColor = oldColor;
+
+        }
+
+        /// <summary>
+        /// This will Print the name of program and who created it to console
+        /// </summary>
+        static void TellPeopleWhatProgramThisis()
+        {
+            //Change Console Text color 
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.Write("M");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("agic 8 ball(By: Barnacules)");
+            
+        }
+
+        //This function return tect user types
+
+        static string GetQuestionFromUser ()
+        {
+            //This block will ask user question
+            //store question text in questionString variable
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Ask a question?: ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            string questionString = Console.ReadLine();
+
+            return questionString;
+            
+        }
+
+
+    }
+}
